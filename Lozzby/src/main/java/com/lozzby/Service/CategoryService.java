@@ -30,8 +30,7 @@ public class CategoryService {
 	}
 	
 	public Optional<Category> getCategoryById(int id) {
- 
-		
+        
 		return this.categoryRepo.findById(id);
 	}
 

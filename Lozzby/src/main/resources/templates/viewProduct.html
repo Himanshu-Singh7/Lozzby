@@ -18,7 +18,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="auto" height="40"
+            <img th:src="@{/images/logo.jpg}" src="../static/images/logo.jpg" width="auto" height="90"
                  class="d-inline-block align-top" alt=""/>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -30,19 +30,19 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/}" href="#">home</a>
+                    <a class="nav-link" th:href="@{/}" href="#">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/shop}" href="#">shop</a>
+                    <a class="nav-link" th:href="@{/shop}" href="#">Shop</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/cart}" href="#">cart</a>
+                    <a class="nav-link" th:href="@{/cart}" href="#">Cart</a>
                 </li>
                 <li class="nav-item active">
                     <span class="nav-link" th:text="${cartCount}"></span>
