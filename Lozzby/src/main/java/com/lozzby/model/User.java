@@ -14,10 +14,14 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
@@ -35,7 +39,7 @@ public class User {
     @Column(name = "email" , nullable =  false , unique = true)
     @Email(message = "Email is not valid",regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
-    @NotEmpty
+   
     private String Password;
     
     @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER )
@@ -54,7 +58,7 @@ public class User {
 		this.Password = user.getPassword();
 		this.roles = user.getRoles();
 	}
-    
-    
+
+	
     
 }
