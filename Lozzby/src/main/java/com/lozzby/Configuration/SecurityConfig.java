@@ -36,16 +36,10 @@ public class SecurityConfig {
         return new UserDetailsServiceCustom();
     }
 
-     
-	 
-
-	@Bean
+        @Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		
-		AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
-
+	AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
         builder.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
-
         AuthenticationManager manager = builder.build();
 
 //		return http
@@ -101,9 +95,6 @@ public class SecurityConfig {
         .exceptionHandling()
         .and()
         .csrf().disable()
-        
-        
-      
         .authenticationManager(manager)
         .httpBasic()
         .and()
@@ -116,11 +107,7 @@ return http.build();
 	
 	
 	}
-
-	
-	
-	
-	 @Bean
+           @Bean
 	    public WebSecurityCustomizer webSecurityCustomizer(){
 	        return (web) ->
 	                web.ignoring()
