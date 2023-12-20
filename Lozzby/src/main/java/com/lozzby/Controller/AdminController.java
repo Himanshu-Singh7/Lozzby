@@ -1,8 +1,10 @@
 package com.lozzby.Controller;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,12 +21,10 @@ import com.lozzby.Service.ProductService;
 import com.lozzby.model.Category;
 import com.lozzby.model.Product;
 
-
-
 @Controller
 public class AdminController {
-	
-	public static String uploadDir = System.getProperty("user.dir")+"/src/main/resources/static/productImages";
+
+	public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
 
 	@Autowired
 	private CategoryService categoryService;
@@ -95,7 +95,7 @@ public class AdminController {
 	public String productAddPost(@ModelAttribute("productDTO") ProductDto productDTO,
 			@RequestParam("productImage") MultipartFile file, @RequestParam("imgName") String imgName)
 			throws IOException {
-		
+
 		Product product = new Product();
 		product.setId(productDTO.getId());
 		product.setName(productDTO.getName());
@@ -104,33 +104,31 @@ public class AdminController {
 		product.setDescription(productDTO.getDescription());
 		product.setCategory(this.categoryService.getCategoryById(productDTO.getCategoryId()).get());
 		String imageUUID;
-		if(!file.isEmpty()) {
+		if (!file.isEmpty()) {
 			imageUUID = file.getOriginalFilename();
-			
-			Path fileNameandPath = Paths.get(uploadDir,imageUUID);
-			Files.write(fileNameandPath,file.getBytes());
-		}else {
+
+			Path fileNameandPath = Paths.get(uploadDir, imageUUID);
+			Files.write(fileNameandPath, file.getBytes());
+		} else {
 			imageUUID = imgName;
 		}
 		product.setImageName(imageUUID);
 		this.productService.addProduct(product);
-		
+
 		return "redirect:/admin/products";
 
 	}
 
-	
 	@GetMapping("/admin/product/delete/{id}")
 	public String deleteProduct(@PathVariable int id) {
 		this.productService.removeProductById(id);
 		return "redirect:/admin/products";
 	}
-	
-	
+
 	@GetMapping("/admin/product/update/{id}")
 	public String updateProdect(@PathVariable long id, Model model) {
 		Product product = this.productService.getProductById(id).get();
-		
+
 		ProductDto productDTO = new ProductDto();
 		productDTO.setId(product.getId());
 		productDTO.setName(product.getName());
@@ -139,7 +137,7 @@ public class AdminController {
 		productDTO.setDescription(product.getDescription());
 		productDTO.setImageName(product.getImageName());
 		productDTO.setCategoryId(product.getCategory().getId());
-		
+
 		model.addAttribute("categories", this.categoryService.getAllCategory());
 		model.addAttribute("productDTO", productDTO);
 		return "productsAdd";

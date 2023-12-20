@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.lozzby.global.GlobalData;
 import com.lozzby.model.Role;
 import com.lozzby.model.User;
 import com.lozzby.repository.RoleRepo;
@@ -31,6 +33,7 @@ public class LoginController {
 	
 	@GetMapping("/login")
 	public String login() {
+		GlobalData.cart.clear();
 		return "login";
 		
 	}
